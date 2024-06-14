@@ -24,15 +24,25 @@
       </el-row>
     </div>
     <div class="endIconDiv">
-      <img alt="END" class="endIconImg" src="https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/site/end.png">
+      <img alt="END" class="endIconImg" :src="`${store.getters.urlPrefix}/site/end.png`">
     </div>
   </div>
 </template>
 
 <script>
 import ProductsAsideCategoriesComponent from "@/components/user-facing/home-page/ProductsAsideCategoriesComponent.vue";
+// import { useStore } from 'vuex';
+import store from "@/store/objectStore";
+
+// const store = useStore();
+
 export default {
   name: "BottomListComponent",
+  computed: {
+    store() {
+      return store
+    }
+  },
   data() {
     return {
       categories: categories,
@@ -64,15 +74,19 @@ for (let i = 0; i < categories.length; i++) {
   for (let j = 0; j < categories[i].products.length; j++) {
     //require中文件的路径必须使用拼接的方式，不要写死
     let src = '';
-    if (categories[i].products[j].images.length !== 0) {
-      if (categories[i].products[j].images[0].singleMiddle !== null) {
-        src = categories[i].products[j].images[0].singleMiddle;
+    try {
+      if (categories[i].products[j].images.length !== 0) {
+        if (categories[i].products[j].images[0].singleMiddle !== null) {
+          src = categories[i].products[j].images[0].singleMiddle;
+        } else {
+          src = `${store.getters.urlPrefix}/productSingleMiddle/` +
+              categories[i].products[j].images[0].id + '.jpg';
+        }
+        images[i].push(src);//直接取第一张图片
       } else {
-        src = 'https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/productSingleMiddle/' +
-            categories[i].products[j].images[0].id + '.jpg';
+        images[i].push("");
       }
-      images[i].push(src);//直接取第一张图片
-    } else {
+    } catch (e) {
       images[i].push("");
     }
 
@@ -166,7 +180,8 @@ span.divider {
 div.rowTitle {
   margin-bottom: 10px;
 }
-.itemTab{
+
+.itemTab {
   cursor: pointer;
 }
 </style>
