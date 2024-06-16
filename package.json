@@ -17,7 +17,8 @@
     "qs": "^6.11.2",
     "swiper": "^9.4.1",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.13"
+    "vue-router": "^4.0.13",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
