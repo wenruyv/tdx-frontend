@@ -26,45 +26,47 @@
 </template>
 
 <script>
-import {Swiper,SwiperSlide} from 'swiper/vue'
+import {Swiper, SwiperSlide} from 'swiper/vue'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import {Pagination} from "swiper";
+import store from "@/store/objectStore";
 
 export default {
   name: "SwiperComponent",
-  components:{
+  components: {
     Swiper,
     SwiperSlide
   },
-  data(){
-    return{
-      modules:[Pagination],
-      picSrc:[
-        "https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/lunbo/1.jpg",
-        "https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/lunbo/2.jpg",
-        "https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/lunbo/3.jpg",
-        "https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/lunbo/4.jpg"],
+  data() {
+    return {
+      modules: [Pagination],
+      picSrc: [
+        store.getters.urlPrefix + "/lunbo/1.jpg",
+        store.getters.urlPrefix + "/lunbo/2.jpg",
+        store.getters.urlPrefix + "/lunbo/3.jpg",
+        store.getters.urlPrefix + "/lunbo/4.jpg"],
     }
   },
-  methods:{
-    hideSwiper:function (){
-      let swiper=document.getElementById("SwiperComponent")
-      swiper.style.display="none"
+  methods: {
+    hideSwiper: function () {
+      let swiper = document.getElementById("SwiperComponent")
+      swiper.style.display = "none"
     },
-    showSwiper:function (){
-      let swiper=document.getElementById("SwiperComponent")
-      swiper.style.display="block"
+    showSwiper: function () {
+      let swiper = document.getElementById("SwiperComponent")
+      swiper.style.display = "block"
     }
   }
 }
 </script>
 
 <style scoped>
-#SwiperComponent{
+#SwiperComponent {
   display: block;
 }
-img.imgClass{
+
+img.imgClass {
   width: 100%;
   height: 546px;
 }

@@ -1,6 +1,7 @@
 <template>
   <div>
-    <el-table stripe :data="orderData.slice((currentPage-1)*pageSize, currentPage*pageSize)" style="width: 100%;margin-left: 0;margin-right: 0">
+    <el-table stripe :data="orderData.slice((currentPage-1)*pageSize, currentPage*pageSize)"
+              style="width: 100%;margin-left: 0;margin-right: 0">
       <el-table-column sortable prop="id" label="订单ID" align="center" width="150"></el-table-column>
       <el-table-column sortable prop="uid" label="买家ID" align="center" width="150"></el-table-column>
       <el-table-column prop="orderCode" label="订单编号" align="center" width="200"></el-table-column>
@@ -96,29 +97,29 @@ export default {
     handleCurrentChange(val) {
       this.currentPage = val;
     },
-    confirmDelivery(oid,status){
+    confirmDelivery(oid, status) {
       ElMessageBox.confirm('确认发货?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.deliveryOrder(oid,status);
+        this.deliveryOrder(oid, status);
       }).catch(() => {
       });
     },
-    deliveryOrder(orderId,status){
+    deliveryOrder(orderId, status) {
       axios.post('/order/updateStatus', qs.stringify({
         "id": orderId,
         "status": status,
       }))
           .then(res => {
-            if(res.data.flag){
+            if (res.data.flag) {
               this.$message({
                 message: '发货成功',
                 type: 'success'
               });
               this.fetchData();
-            }else {
+            } else {
               this.$message({
                 message: '发货失败',
                 type: 'error'

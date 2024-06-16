@@ -1,5 +1,5 @@
 <script setup>
-import {ref, defineEmits} from 'vue';
+import {defineEmits, ref} from 'vue';
 import {useRouter} from "vue-router";
 import ProductsAsideCategoriesComponent from "@/components/user-facing/home-page/ProductsAsideCategoriesComponent.vue";
 

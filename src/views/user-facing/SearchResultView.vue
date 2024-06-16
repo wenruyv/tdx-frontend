@@ -27,14 +27,16 @@ import axios from "axios";
 import {ref} from "vue";
 import {useRouter} from "vue-router";
 import {ElMessage} from "element-plus";
+import {useStore} from "vuex";
 
+const store = useStore();
 const router = useRouter();
 let data = ref([]);
 let show = ref(false);
 
 async function search(params) {
   if (params === "") {
-    params = "";
+    params = "NULL";
   }
   await axios.get('/product/search/' + params)
       .then(res => {
@@ -55,7 +57,7 @@ async function search(params) {
 function getPath(item) {
   if (item.images && item.images[0] && item.images[0].urlPath)
     return item.images[0]?.urlPath;
-  return "https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/productSingleMiddle/" + item.images[0].id + ".jpg";
+  return store.getters.urlPrefix + "/productSingleMiddle/" + item.images[0].id + ".jpg";
 }
 
 function showDetails(item) {

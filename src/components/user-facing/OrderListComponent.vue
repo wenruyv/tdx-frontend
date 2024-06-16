@@ -31,8 +31,8 @@
           <div v-for="(item, index) in row.orderItems" :key="index" class="product-item">
             <div style="margin-top: 35px;margin-bottom: 35px">
               <img :src="getImagePath(item.productImage)"
-                                                                   alt="Product Image"
-                                                                   class="product-image" style="padding: 0">
+                   alt="Product Image"
+                   class="product-image" style="padding: 0">
               &nbsp;&nbsp;&nbsp;&nbsp;
               <span class="itemName" style="font-size: 15px" @click="showDetails(item.pid)">
                 {{ item.name }}
@@ -84,6 +84,7 @@ import axios from 'axios'
 import qs from "qs";
 import router from "@/router";
 import {ElMessageBox} from "element-plus";
+import store from '@/store/objectStore';
 
 
 export default {
@@ -115,7 +116,7 @@ export default {
       if (image.singleSmall !== null)
         return image.singleSmall;
       else
-        return 'https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/productSingleSmall/' + image.id + '.jpg';
+        return store.getters.urlPrefix + '/productSingleSmall/' + image.id + '.jpg';
     },
     handleClick(event) {
       // 按照选中的标签筛选订单

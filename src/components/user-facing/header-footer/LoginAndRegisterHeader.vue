@@ -1,10 +1,12 @@
 <script setup>
+import {useStore} from "vuex";
 
+const store = useStore();
 </script>
 
 <template>
   <router-link to="/">
-    <img src="https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/header/simpleLogo.png" alt="logo" id="logo">
+    <img :src="`${store.getters.urlPrefix}/header/simpleLogo.png`" alt="logo" id="logo">
   </router-link>
 </template>
 
