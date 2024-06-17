@@ -287,19 +287,19 @@ export default {
 }
 
 .el-tabs__item:hover {
-  color: red; /* 调整颜色 */
+  color: lightskyblue; /* 调整颜色 */
 }
 
 .el-tabs__item.is-active {
-  color: red; /* 调整颜色 */
+  color: lightskyblue; /* 调整颜色 */
 }
 
 .el-tabs__item:focus {
-  color: red; /* 调整颜色 */
+  color: lightskyblue; /* 调整颜色 */
 }
 
 .el-tabs__active-bar {
-  background-color: red; /* 调整颜色 */
+  background-color: lightskyblue; /* 调整颜色 */
 }
 
 .el-tabs {
@@ -322,7 +322,7 @@ export default {
 }
 
 .itemName:hover {
-  color: orangered;
+  color: lightskyblue;
 }
 
 

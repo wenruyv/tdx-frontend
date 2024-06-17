@@ -8,7 +8,7 @@ const store = useStore();
   <div id="footer" class="footer" style="display: block;">
     <div id="footer_ensure" class="footer_ensure">
       <a href="https://www.tmall.com/">
-        <img :src="`${store.getters.urlPrefix}/footer/ensure.png`" alt="ensure">
+        <span style="font-size: 24px; font-weight: bold;">淘东夕</span>
       </a>
     </div>
 
@@ -21,7 +21,7 @@ const store = useStore();
         <a href="#">支付宝充值</a>
       </div>
       <div class="descColumn">
-        <span class="descColumnTitle">京东保障</span>
+        <span class="descColumnTitle">淘东夕保障</span>
         <a href="#">发票保障</a>
         <a href="#">售后规则</a>
         <a href="#">缺货赔付</a>
@@ -30,21 +30,21 @@ const store = useStore();
         <span class="descColumnTitle">支付方式</span>
         <a href="#">快捷支付</a>
         <a href="#">信用卡</a>
-        <a href="#">蚂蚁花呗</a>
+        <a href="#">淘东夕花呗</a>
         <a href="#">货到付款</a>
       </div>
       <div class="descColumn">
         <span class="descColumnTitle">商家服务</span>
         <a href="#">商家入驻</a>
         <a href="#">商家中心</a>
-        <a href="#">京东智库</a>
-        <a href="#">京东规则</a>
+        <a href="#">淘东夕智库</a>
+        <a href="#">淘东夕规则</a>
         <a href="#">物流服务</a>
-        <a href="#">喵言喵语</a>
+        <a href="#">淘言夕语</a>
         <a href="#">运营服务</a>
       </div>
       <div class="descColumn">
-        <span class="descColumnTitle">手机天猫</span>
+        <span class="descColumnTitle">手机淘东夕</span>
         <a href="#"><img :src="`${store.getters.urlPrefix}/footer/ma.png`" alt="ma"></a>
       </div>
 
@@ -54,7 +54,7 @@ const store = useStore();
     <img id="cateye" class="cateye" :src="`${store.getters.urlPrefix}/footer/cateye.png`" alt="cateye">
     <div id="copyright" class="copyright">
       <div class="white_link">
-        <a href="#">关于天猫</a> &nbsp;
+        <a href="#">关于淘东夕</a> &nbsp;
         <a href="#">帮助中心</a> &nbsp;
         <a href="#">开放平台</a> &nbsp;
         <a href="#">诚聘英才</a> &nbsp;
@@ -65,12 +65,12 @@ const store = useStore();
         <a href="#">廉正举报</a> &nbsp;
       </div>
       <div class="white_link">
-        <a href="#">阿里巴巴集团</a><span class="slash">&nbsp; | &nbsp;</span>
-        <a href="#">淘宝网</a><span class="slash">&nbsp; | &nbsp;</span>
-        <a href="#">天猫</a><span class="slash">&nbsp; | &nbsp;</span>
+        <a href="#">淘东夕集团</a><span class="slash">&nbsp; | &nbsp;</span>
+        <a href="#">淘东夕网</a><span class="slash">&nbsp; | &nbsp;</span>
+        <a href="#">淘东夕</a><span class="slash">&nbsp; | &nbsp;</span>
         <a href="#">聚划算</a><span class="slash">&nbsp; | &nbsp;</span>
         <a href="#">全球速卖通</a><span class="slash">&nbsp; | &nbsp;</span>
-        <a href="#">阿里旅行·去啊 </a><span class="slash">&nbsp; | &nbsp;</span>
+        <a href="#">淘东夕旅行·去啊 </a><span class="slash">&nbsp; | &nbsp;</span>
         <a href="#">万网</a><span class="slash">&nbsp; | &nbsp;</span>
         <a href="#">高德</a><span class="slash">&nbsp; | &nbsp;</span>
         <a href="#">优视</a><span class="slash">&nbsp; | &nbsp;</span>
@@ -167,7 +167,7 @@ div.footer_desc a {
 }
 
 div.footer_desc a:hover {
-  color: red;
+  color: #87CEEB;
 }
 
 img.cateye {

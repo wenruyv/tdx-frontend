@@ -72,9 +72,9 @@ function toOrder() {
     <div class="pull-left">
       <router-link to="/">
         <span class="glyphicon glyphicon-home redColor" style="color:#C40000;margin:0"></span>
-        天猫首页
+        淘东夕首页
       </router-link>
-      <span>喵，欢迎来天猫</span>
+      <span>Hi，欢迎来淘东夕</span>
 
       <a v-if="isLogin" href="#">{{ userName }}</a>
       <span v-if="isLogin" @click="logout" class="link">退出</span>
@@ -126,7 +126,7 @@ nav.top span, nav.top a {
 }
 
 nav.top a:hover {
-  color: #C40000;
+  color: #87CEEB;
 }
 
 nav a {
@@ -155,7 +155,7 @@ div.pull-right {
 }
 
 .link:hover {
-  color: #C40000;
+  color: #87CEEB;
   cursor: pointer;
 }
 

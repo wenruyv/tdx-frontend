@@ -133,7 +133,7 @@ div.priceTab {
   width: 100%;
   margin-left: 10px;
   font-size: 18px;
-  color: orangered;
+  color: #87CEEB;
 }
 
 div.imgTab {
