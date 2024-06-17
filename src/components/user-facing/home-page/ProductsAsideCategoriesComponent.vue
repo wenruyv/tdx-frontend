@@ -88,7 +88,7 @@ div.productsAsideCategories a {
 }
 
 div.productsAsideCategories a:hover {
-  color: #C40000;
+  color: lightskyblue;
   text-decoration: none;
 }
 

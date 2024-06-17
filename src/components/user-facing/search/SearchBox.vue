@@ -57,7 +57,7 @@ div.searchDiv {
 div.searchDiv input {
   flex: 1;
   width: 275px;
-  border: 1px solid #c40000;
+  border: 1px solid #87CEEB;
   height: 36px;
   margin-left: 2px;
   outline: none;
@@ -67,8 +67,8 @@ div.searchDiv input {
 div.searchDiv button {
   width: 110px;
   height: 36px;
-  border: 2px solid #c40000;
-  background-color: #C40000;
+  border: 2px solid #87CEEB;
+  background-color: #87CEEB;
   margin-left: 2px;
   color: white;
   font-size: 20px;
@@ -77,7 +77,7 @@ div.searchDiv button {
 }
 
 .item:hover {
-  color: #ff6ba4;
+  color:lightskyblue;
 }
 
 .item {

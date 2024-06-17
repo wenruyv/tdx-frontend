@@ -4,8 +4,7 @@
       <td>
         <div class="imgDiv">
           <router-link to="/">
-            <img id="logo" alt="logo" class="logo"
-                 :src="`${store.getters.urlPrefix}/header/logo.gif`">
+            <span style="font-size: 50px; font-weight: bold;margin-right: 50px">淘东西</span>
           </router-link>
         </div>
       </td>
@@ -19,9 +18,9 @@
 <script setup>
 import SearchBox from "@/components/user-facing/search/SearchBox.vue";
 import {defineEmits} from "vue";
-import {useStore} from "vuex";
+// import {useStore} from "vuex";
 
-const store = useStore();
+// const store = useStore();
 const emit = defineEmits(["search"]);
 
 function handle(item) {

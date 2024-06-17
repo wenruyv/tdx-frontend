@@ -12,9 +12,11 @@
         <div class="rightMenu">
           <div @mouseenter="showImage" @mouseleave="hideImage" style="float: left;">
             <a href=""><img alt="chaoshi" :src="`${store.getters.urlPrefix}/HomePage/chaoshi.png`"/></a>
+<!--            <a href="">淘商城</a>-->
           </div>
           <div style="margin-left: 20px; float: left" @mouseenter="showImage" @mouseleave="hideImage">
             <a href=""><img alt="guoji" :src="`${store.getters.urlPrefix}/HomePage/guoji.png`"/></a>
+<!--            <a href="" >淘国际</a>-->
           </div>
           <div v-for="(category,index) in categories" :key="category.cid" class="categoryTab">
             <router-link v-if="index<5" :to="'/search?keyword='+category.category_name" @mouseenter="showImage"
@@ -71,7 +73,7 @@ div.categoryWithCarousel {
 }
 
 div.categoryWithCarousel div.headbar {
-  background-color: #DD2727;
+  background-color: #87CEEB;
 }
 
 div.categoryWithCarousel div.eachCategory div {
@@ -98,7 +100,7 @@ div.categoryWithCarousel div.rightMenu a {
 
 div.categoryWithCarousel div.head {
   width: 200px;
-  background-color: #C60A0A;
+  background-color: #87CEEB;
   height: 36px;
   line-height: 36px;
   font-size: 16px;
