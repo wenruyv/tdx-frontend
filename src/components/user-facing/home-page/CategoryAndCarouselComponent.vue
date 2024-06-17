@@ -1,21 +1,25 @@
 <template>
   <div id="guidePage">
-    <img id="catear" :style="{ visibility:'hidden'}" alt="catear" class="catear" :src="`${store.getters.urlPrefix}/HomePage/catear.png`"/>
+    <img id="catear" :style="{ visibility:'hidden'}" alt="catear" class="catear"
+         :src="`${store.getters.urlPrefix}/HomePage/catear.png`"/>
     <div id="categoryWithCarousel" class="categoryWithCarousel">
       <div class="headbar show1">
         <div class="head">
-          <div class="leftMenu"><img align="center" alt="list" :src="`${store.getters.urlPrefix}/HomePage/list.png`" style="height: 24px"></div>
+          <div class="leftMenu"><img align="center" alt="list" :src="`${store.getters.urlPrefix}/HomePage/list.png`"
+                                     style="height: 24px"></div>
           <div class="leftMenu">商品分类</div>
         </div>
         <div class="rightMenu">
           <div @mouseenter="showImage" @mouseleave="hideImage" style="float: left;">
-             <a href=""><img alt="chaoshi" :src="`${store.getters.urlPrefix}/HomePage/chaoshi.png`"/></a>
+            <a href=""><img alt="chaoshi" :src="`${store.getters.urlPrefix}/HomePage/chaoshi.png`"/></a>
           </div>
           <div style="margin-left: 20px; float: left" @mouseenter="showImage" @mouseleave="hideImage">
             <a href=""><img alt="guoji" :src="`${store.getters.urlPrefix}/HomePage/guoji.png`"/></a>
           </div>
           <div v-for="(category,index) in categories" :key="category.cid" class="categoryTab">
-            <router-link v-if="index<5" :to="'/search?keyword='+category.category_name" @mouseenter="showImage" @mouseleave="hideImage">{{ category.category_name }}</router-link>
+            <router-link v-if="index<5" :to="'/search?keyword='+category.category_name" @mouseenter="showImage"
+                         @mouseleave="hideImage">{{ category.category_name }}
+            </router-link>
           </div>
         </div>
       </div>
@@ -27,19 +31,19 @@
 <script setup>
 import CategoryMenuComponent from "@/components/user-facing/home-page/CategoryMenuComponent.vue";
 import ProductsAsideCategoriesComponent from "@/components/user-facing/home-page/ProductsAsideCategoriesComponent.vue";
-import { useStore } from 'vuex';
+import {useStore} from 'vuex';
 
 const store = useStore();
 
-let categories =ProductsAsideCategoriesComponent.data().categories
+let categories = ProductsAsideCategoriesComponent.data().categories
 
 function showImage(event) {
 
   //eslint-disable-next-line no-unused-vars
-  const {left: left, right: right,top: top, width: width} = event.target.getBoundingClientRect();
+  const {left: left, right: right, top: top, width: width} = event.target.getBoundingClientRect();
   let catear = document.getElementById("catear");
   //要记得减去margin-left的部分，margin-left是%5,所以用window.innerwidth先得到窗口的宽度，之后再乘以5%来获取需要减去的宽度
-  let destLeft = left-window.innerWidth*0.05+width/2-30/2//找到box的中间位置,45是猫图片的长度（加上了padding）
+  let destLeft = left - window.innerWidth * 0.05 + width / 2 - 30 / 2//找到box的中间位置,45是猫图片的长度（加上了padding）
   let destLeftStr = "" + destLeft + "px"
   catear.style.visibility = "visible";
   catear.style.left = destLeftStr;
@@ -53,7 +57,7 @@ function hideImage() {
 </script>
 
 <style scoped>
-div.tab{
+div.tab {
   width: 1px;
 }
 

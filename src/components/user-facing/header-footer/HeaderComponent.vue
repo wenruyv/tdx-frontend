@@ -1,7 +1,7 @@
 <script setup>
 import axios from "axios";
-import { onMounted, ref } from "vue";
-import { useRouter } from "vue-router";
+import {onMounted, ref} from "vue";
+import {useRouter} from "vue-router";
 import {ElMessage} from "element-plus";
 // import qs from "qs";
 
@@ -18,6 +18,7 @@ function login() {
 function register() {
   router.push("/user/register")
 }
+
 function logout() {
   axios.get("/user/logout")
       .then((res) => {
@@ -84,7 +85,7 @@ function toOrder() {
 
 
     <div v-if="isLogin" class="pull-right">
-      <span style="cursor: pointer"  @click="toOrder">我的订单</span>
+      <span style="cursor: pointer" @click="toOrder">我的订单</span>
     </div>
   </nav>
 </template>
@@ -127,6 +128,7 @@ nav.top span, nav.top a {
 nav.top a:hover {
   color: #C40000;
 }
+
 nav a {
   text-decoration: none;
 }
@@ -144,10 +146,11 @@ nav.top div.row div {
   border: 1px solid gray;
 }
 
-div.pull-left{
+div.pull-left {
   margin-left: 10px;
 }
-div.pull-right{
+
+div.pull-right {
   margin-right: 10px;
 }
 

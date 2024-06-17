@@ -3,7 +3,7 @@
     <Header></Header>
   </div>
 
-  <div id="login">
+  <div id="login" :style="{ backgroundImage: 'url(' + getBackgroundUrl + ')' }">
     <div class="container">
       <el-form class="form-wrap" label-width="60px">
         <h2 align="center">登录</h2>
@@ -31,20 +31,21 @@
 
 <script setup>
 import axios from "axios";
-
-//本地部署true，服务器部署false
-axios.defaults.withCredentials = true;
 import Header from "@/components/user-facing/header-footer/LoginAndRegisterHeader.vue";
 import Footer from "@/components/user-facing/header-footer/FooterComponent.vue";
 import {ref} from "vue";
-import {ElForm, ElFormItem, ElInput, ElButton} from "element-plus";
+import {ElButton, ElForm, ElFormItem, ElInput, ElMessage} from "element-plus";
 import {useRouter} from "vue-router";
 import qs from "qs";
+import {useStore} from "vuex";
+
+const store = useStore();
+//本地部署true，服务器部署false
+axios.defaults.withCredentials = true;
 
 const router = useRouter();
 const username = ref("");
 const password = ref("");
-import {ElMessage} from "element-plus";
 
 function submitForm() {
 
@@ -104,6 +105,10 @@ function submitForm() {
   return false;
 }
 
+const getBackgroundUrl = () => {
+  return store.getters.urlPrefix + "/login/6702.png";
+}
+
 </script>
 
 <style scoped>
@@ -117,7 +122,6 @@ function submitForm() {
 #login {
   height: 100vh;
   width: 90%;
-  background-image: url("https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/login/6702.png");
   background-size: cover;
   background-repeat: no-repeat;
   margin-left: auto;

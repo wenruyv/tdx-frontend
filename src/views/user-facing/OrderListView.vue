@@ -10,14 +10,14 @@ const uid = parseInt(route.query.id.toString());
 </script>
 
 <template>
-<div style="width: 100%">
-  <Header />
-  <SimpleSearchComponents />
-  <Suspense>
-    <OrderListComponent :userId = "uid" id = "order-list" />
-  </Suspense>
-  <Footer />
-</div>
+  <div style="width: 100%">
+    <Header/>
+    <SimpleSearchComponents/>
+    <Suspense>
+      <OrderListComponent :userId="uid" id="order-list"/>
+    </Suspense>
+    <Footer/>
+  </div>
 </template>
 
 <style scoped>

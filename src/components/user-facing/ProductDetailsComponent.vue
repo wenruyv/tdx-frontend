@@ -13,7 +13,7 @@
             <tr>
               <td>
                 <div class="big-show-div">
-                  <img :src="leftImage" alt="商品图片" class="big-show-image" />
+                  <img :src="leftImage" alt="商品图片" class="big-show-image"/>
                 </div>
               </td>
             </tr>
@@ -47,7 +47,7 @@
               <span>此商品即将参加聚划算，<span class="juhuasuanTime">1天19小时</span>后开始，</span>
             </div>
 
-            <div id="price-show">
+            <div id="price-show" :style="{ backgroundImage: 'url(' + backgroundImageUrl + ')' }">
               <div style="padding-top: 20px;">
                 <span class="common-font">价格</span>
                 <span>￥</span>
@@ -123,8 +123,9 @@
 
 <script>
 import axios from "axios";
-import {useRouter, useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {ElMessage} from "element-plus";
+import store from "@/store/objectStore";
 
 export default {
   name: "ProductDetails",
@@ -205,7 +206,7 @@ export default {
                 if (this.showImages[0].urlPath !== null)
                   this.leftImage = this.showImages[0].urlPath;
                 else
-                  this.leftImage = "https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/productSingle/"
+                  this.leftImage = store.getters.urlPrefix + "/productSingle/"
                       + this.showImages[0].id + ".jpg";
               } else
                 this.leftImage = "";
@@ -235,17 +236,17 @@ export default {
       if (category.urlPath !== null) {
         return category.urlPath;
       }
-      return "https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/category/" + String(category.id) + ".jpg";
+      return store.getters.urlPrefix + "/category/" + String(category.id) + ".jpg";
     },
     getImagePath(image) {
       if (image.singleSmall !== null)
         return image.singleSmall;
-      return "https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/productSingleSmall/" + String(image.id) + ".jpg";
+      return store.getters.urlPrefix + "/productSingleSmall/" + String(image.id) + ".jpg";
     },
     getDetailImagePath(image) {
       if (image.urlPath !== null)
         return image.urlPath;
-      return "https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/productDetail/" + String(image.id) + ".jpg";
+      return store.getters.urlPrefix + "/productDetail/" + String(image.id) + ".jpg";
     },
     getComment(count) {
       return "累计评价 " + count;
@@ -254,7 +255,7 @@ export default {
       if (image.urlPath !== null)
         this.leftImage = image.urlPath;
       else
-        this.leftImage = "https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/productSingle/" + image.id + ".jpg";
+        this.leftImage = store.getters.urlPrefix + "/productSingle/" + image.id + ".jpg";
     },
     buyProduct() {
       if (uid === -1) {
@@ -290,6 +291,11 @@ export default {
     this.show = false;
     await this.getDetails(this.route.query.id);
     this.show = true;
+  },
+  computed: {
+    backgroundImageUrl() {
+      return this.$store.getters.urlPrefix + "/site/priceBackground.png";
+    }
   }
 };
 
@@ -363,7 +369,6 @@ var pid = -1;
 .product-show-right {
   height: 95%;
   width: 100%;
-//border: #cccccc solid 1px; vertical-align: top;
   margin-top: 20px;
 }
 
@@ -435,7 +440,6 @@ var pid = -1;
 }
 
 #price-show {
-  background-image: url("https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/site/priceBackground.png");
   margin-top: 0;
 }
 

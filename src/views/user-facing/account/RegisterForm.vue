@@ -4,7 +4,7 @@ import Header from "@/components/user-facing/header-footer/LoginAndRegisterHeade
 import Footer from "@/components/user-facing/header-footer/FooterComponent.vue";
 import {ref} from "vue";
 import qs from "qs";
-import { useRouter } from "vue-router";
+import {useRouter} from "vue-router";
 
 const router = useRouter();
 const username = ref("");
@@ -43,8 +43,7 @@ function submitForm() {
         if (response.data.flag) {
           message.value = '注册成功,将自动跳转...';
           router.push('/user/login');
-        }
-        else {
+        } else {
           message.value = '注册失败,用户名已存在,请重试!';
           username.value = "";
           password.value = "";

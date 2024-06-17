@@ -22,7 +22,6 @@ window.scroll({
 
 <style scoped>
 ProductDetailsComponent {
-  //width: 85%;
   margin-left: auto;
   margin-right: auto;
 }
