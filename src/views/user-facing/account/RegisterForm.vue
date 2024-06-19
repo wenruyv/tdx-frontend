@@ -3,7 +3,6 @@ import axios from "axios";
 import Header from "@/components/user-facing/header-footer/LoginAndRegisterHeader.vue";
 import Footer from "@/components/user-facing/header-footer/FooterComponent.vue";
 import {ref} from "vue";
-import qs from "qs";
 import {useRouter} from "vue-router";
 
 const router = useRouter();
@@ -33,23 +32,22 @@ function submitForm() {
   }
 
   //TODO 修改地址
-  axios.post('/user/register', qs.stringify({
+  axios.post('/user/register', {
     "username": username.value,
     "email": email.value,
     "address": address.value,
     "password": password.value
-  }))
-      .then(response => {
-        if (response.data.flag) {
-          message.value = '注册成功,将自动跳转...';
-          router.push('/user/login');
-        } else {
-          message.value = '注册失败,用户名已存在,请重试!';
-          username.value = "";
-          password.value = "";
-          email.value = "";
-        }
-      })
+  }).then(response => {
+    if (response.data.flag) {
+      message.value = '注册成功,将自动跳转...';
+      router.push('/user/login');
+    } else {
+      message.value = '注册失败,用户名已存在,请重试!';
+      username.value = "";
+      password.value = "";
+      email.value = "";
+    }
+  })
       .catch(() => {
         message.value = '注册失败,请重试!';
       });

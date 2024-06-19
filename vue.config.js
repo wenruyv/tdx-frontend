@@ -1,10 +1,10 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
-  devServer: {
-    open: false,
-    port: 8888,
-  },
+  // devServer: {
+  //   open: false,
+  //   port: 8888,
+  // },
 })
 module.exports = {
   css: {

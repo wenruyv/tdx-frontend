@@ -3,7 +3,7 @@
     <Header></Header>
   </div>
 
-  <div id="login" :style="{ backgroundImage: 'url(' + getBackgroundUrl + ')' }">
+  <div id="login">
     <div class="container">
       <el-form class="form-wrap" label-width="60px">
         <h2 align="center">登录</h2>
@@ -33,10 +33,9 @@
 import axios from "axios";
 import Header from "@/components/user-facing/header-footer/LoginAndRegisterHeader.vue";
 import Footer from "@/components/user-facing/header-footer/FooterComponent.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {ElButton, ElForm, ElFormItem, ElInput, ElMessage} from "element-plus";
 import {useRouter} from "vue-router";
-import qs from "qs";
 import {useStore} from "vuex";
 
 const store = useStore();
@@ -55,7 +54,6 @@ function submitForm() {
   }
 
   if (username.value === "" || password.value === "") {
-
     ElMessage({
       message: '用户名或密码不能为空!',
       type: 'error',
@@ -65,49 +63,42 @@ function submitForm() {
   }
 
   //TODO 修改地址
-  axios.post('/user/login', qs.stringify({
+  axios.post('/user/login', {
     "username": username.value,
     "password": password.value,
-  }))
-      .then((res) => {
-        // console.log(res);
-        // if (res.status === 204) {
-        //   return;
-        // }
-        //
-        if (res.data.flag) {
-          ElMessage({
-            message: '登录成功!',
-            type: 'success',
-            duration: 2 * 1000
-          });
-          router.push('/');
-        } else {
-          ElMessage({
-            message: '登录失败，请重试!',
-            type: 'error',
-            duration: 2 * 1000
-          });
-          username.value = "";
-          password.value = "";
-        }
-      })
-      .catch(() => {
-        ElMessage({
-          message: '登录失败，请重试!',
-          type: 'error',
-          duration: 2 * 1000
-        });
-        username.value = "";
-        password.value = "";
+  }).then((res) => {
+    if (res.data.flag) {
+      ElMessage({
+        message: '登录成功!',
+        type: 'success',
+        duration: 2 * 1000
       });
+      router.push('/');
+    } else {
+      ElMessage({
+        message: '登录失败，请重试!',
+        type: 'error',
+        duration: 2 * 1000
+      });
+      username.value = "";
+      password.value = "";
+    }
+  }).catch(() => {
+    ElMessage({
+      message: '登录失败，请重试!',
+      type: 'error',
+      duration: 2 * 1000
+    });
+    username.value = "";
+    password.value = "";
+  });
 
   return false;
 }
 
-const getBackgroundUrl = () => {
-  return store.getters.urlPrefix + "/login/6702.png";
-}
+onMounted(() => {
+  document.getElementById('login').style.backgroundImage = `url(${store.getters.urlPrefix + "/login/6702.png"})`;
+});
 
 </script>
 
