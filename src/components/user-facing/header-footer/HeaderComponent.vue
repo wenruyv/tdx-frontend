@@ -37,6 +37,12 @@ function logout() {
 }
 
 function checkLogin() {
+  if (localStorage.getItem("token") === null || localStorage.getItem("token") === ""
+      || localStorage.getItem("token") === undefined || localStorage.getItem("token") === "undefined") {
+    isLogin.value = false;
+    return;
+  }
+
   axios.get("user/getUser")
       .then((res) => {
         if (res.data.flag) {

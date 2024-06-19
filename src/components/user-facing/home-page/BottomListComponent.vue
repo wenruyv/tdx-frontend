@@ -24,49 +24,24 @@
       </el-row>
     </div>
     <div class="endIconDiv">
-      <img alt="END" class="endIconImg" :src="`${store.getters.urlPrefix}/site/end.png`">
+      <img alt="END" class="endIconImg" :src="`${urlPrefix}/site/end.png`">
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import ProductsAsideCategoriesComponent from "@/components/user-facing/home-page/ProductsAsideCategoriesComponent.vue";
-// import { useStore } from 'vuex';
-import store from "@/store/objectStore";
+import { useStore } from 'vuex';
+// import store from "@/store/urlStore";
+// import {mapGetters} from "vuex";
 
-// const store = useStore();
+const store = useStore();
+const urlPrefix = store.getters['urlStore/urlPrefix'];
+const categories = ProductsAsideCategoriesComponent.data().categories;
+const images = [];
+const prices = [];
+const titles = [];
 
-export default {
-  name: "BottomListComponent",
-  computed: {
-    store() {
-      return store
-    }
-  },
-  data() {
-    return {
-      categories: categories,
-      images: images,
-      titles: titles,
-      prices: prices,
-    }
-  },
-  methods: {
-    itemTabHover: function (e) {
-      e.target.style.borderColor = "skyblue"
-      e.target.style.opacity = 0.7
-    },
-    itemTabLeave: function (e) {
-      e.target.style.borderColor = "white"
-      e.target.style.opacity = 1
-    },
-  }
-}
-
-var categories = ProductsAsideCategoriesComponent.data().categories;
-var images = [];
-var prices = [];
-var titles = [];
 for (let i = 0; i < categories.length; i++) {
   images.push([])
   prices.push([]);
@@ -79,8 +54,7 @@ for (let i = 0; i < categories.length; i++) {
         if (categories[i].products[j].images[0].singleMiddle !== null) {
           src = categories[i].products[j].images[0].singleMiddle;
         } else {
-          src = `${store.getters.urlPrefix}/productSingleMiddle/` +
-              categories[i].products[j].images[0].id + '.jpg';
+          src = urlPrefix + '/productSingleMiddle/' + categories[i].products[j].images[0].id + '.jpg';
         }
         images[i].push(src);//直接取第一张图片
       } else {
@@ -100,6 +74,37 @@ for (let i = 0; i < categories.length; i++) {
     titles[i].push(categories[i].products[j].name); //商品的名称作为标题
   }
 }
+
+// export default {
+//   name: "BottomListComponent",
+//   data() {
+//     return {
+//       categories: categories,
+//       images: images,
+//       titles: titles,
+//       prices: prices,
+//       urlPrefix: urlPrefix
+//     }
+//   },
+//   methods: {
+//     ,
+//     itemTabLeave: function (e) {
+//       e.target.style.borderColor = "white"
+//       e.target.style.opacity = 1
+//     },
+//   }
+// }
+
+const itemTabHover = (e) => {
+  e.target.style.borderColor = "skyblue"
+  e.target.style.opacity = 0.7
+}
+
+const itemTabLeave = (e) => {
+  e.target.style.borderColor = "white"
+  e.target.style.opacity = 1
+}
+
 </script>
 
 <style scoped>

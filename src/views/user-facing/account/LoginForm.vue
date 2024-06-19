@@ -39,6 +39,7 @@ import {useRouter} from "vue-router";
 import {useStore} from "vuex";
 
 const store = useStore();
+const urlPrefix = store.getters['urlStore/urlPrefix'];
 //本地部署true，服务器部署false
 axios.defaults.withCredentials = true;
 
@@ -62,7 +63,6 @@ function submitForm() {
     return false;
   }
 
-  //TODO 修改地址
   axios.post('/user/login', {
     "username": username.value,
     "password": password.value,
@@ -97,7 +97,7 @@ function submitForm() {
 }
 
 onMounted(() => {
-  document.getElementById('login').style.backgroundImage = `url(${store.getters.urlPrefix + "/login/6702.png"})`;
+  document.getElementById('login').style.backgroundImage = `url(${urlPrefix + "/login/6702.png"})`;
 });
 
 </script>

@@ -30,6 +30,7 @@ import {ElMessage} from "element-plus";
 import {useStore} from "vuex";
 
 const store = useStore();
+const urlPrefix = store.getters['urlStore/urlPrefix'];
 const router = useRouter();
 let data = ref([]);
 let show = ref(false);
@@ -57,7 +58,7 @@ async function search(params) {
 function getPath(item) {
   if (item.images && item.images[0] && item.images[0].urlPath)
     return item.images[0]?.urlPath;
-  return store.getters.urlPrefix + "/productSingleMiddle/" + item.images[0].id + ".jpg";
+  return urlPrefix + "/productSingleMiddle/" + item.images[0].id + ".jpg";
 }
 
 function showDetails(item) {

@@ -5,7 +5,7 @@
         <div @mouseenter="showMenu(index,$event)" @mouseleave="hideMenu(index,$event)" v-if="index<16"
              class="eachCategory">
           <span><img height="18" align="center" class="eachCategoryImg"
-                     :src="`${store.getters.urlPrefix}/HomePage/Clip.png`" alt="clip"></span>
+                     :src="`${urlPrefix}/HomePage/Clip.png`" alt="clip"></span>
           <span style="margin-left: 10px;cursor: pointer"
                 @click="fastSearch(category.category_name)">{{ category.category_name }} </span>
           <span></span>
@@ -27,6 +27,7 @@ import {useRouter} from "vue-router";
 import {useStore} from "vuex";
 
 const store = useStore();
+const urlPrefix = store.getters['urlStore/urlPrefix'];
 const emit = defineEmits(["search"]);
 const router = useRouter();
 let keyword = ref("");
@@ -53,7 +54,6 @@ function hideMenu(index, e) {
   e.target.style.backgroundColor = "#e2e2e3"
   ProductsAsideCategoriesComponent.methods.hideMenu(index);
 }
-
 
 </script>
 

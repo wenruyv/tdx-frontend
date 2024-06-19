@@ -4,6 +4,7 @@ import {defineEmits} from "vue";
 import {useStore} from "vuex";
 
 const store = useStore();
+const urlPrefix = store.getters['urlStore/urlPrefix'];
 const emit = defineEmits(["search"]);
 
 function handle(item) {
@@ -16,7 +17,7 @@ function handle(item) {
     <tr>
       <td style="margin-right: 50%; text-align: left">
         <router-link to="/">
-          <img :src="`${store.getters.urlPrefix}/header/simpleLogo.png`" alt="logo" style="float: left"/>
+          <img :src="`${urlPrefix}/header/simpleLogo.png`" alt="logo" style="float: left"/>
         </router-link>
       </td>
       <td style="text-align: right">
