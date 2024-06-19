@@ -7,9 +7,9 @@ const store = useStore();
 <template>
   <div id="footer" class="footer" style="display: block;">
     <div id="footer_ensure" class="footer_ensure">
-      <a href="https://www.tmall.com/">
-        <span style="font-size: 24px; font-weight: bold;">淘东夕</span>
-      </a>
+<!--      <a href="https://www.tmall.com/">-->
+<!--        <span style="font-size: 24px; font-weight: bold;">淘东夕</span>-->
+<!--      </a>-->
     </div>
 
     <div id="footer_desc" class="footer_desc">
