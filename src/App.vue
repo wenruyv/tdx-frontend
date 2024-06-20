@@ -4,23 +4,12 @@
 
 <script setup>
 import axios from "axios";
-// import {ElMessage} from "element-plus";
+import {ElMessage} from "element-plus";
 //本地部署
 axios.defaults.baseURL = "http://localhost:8780";
 axios.defaults.withCredentials = true;
 if (localStorage.getItem("token") !== null) {
   axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
-  // axios.get("/user/getUser")
-  //     .then((res) => {
-  //       if (res.status === 403) {
-  //         localStorage.removeItem("token");
-  //         axios.defaults.headers.common["Authorization"] = "";
-  //       }
-  //     })
-  //     .catch(() => {
-  //       localStorage.removeItem("token");
-  //       axios.defaults.headers.common["Authorization"] = "";
-  //     });
 }
 //服务器部署
 // axios.defaults.baseURL = '/store';
@@ -30,14 +19,14 @@ axios.interceptors.response.use(
       return response;
     },
     (error) => {
-      // if (error.response.status === 403) {
-      //   // 处理 403 错误，清除本地存储的 token
-      //   if (localStorage.getItem("token") !== null) {
-      //     localStorage.removeItem('token');
-      //     axios.defaults.headers.common["Authorization"] = "";
-      //     ElMessage.warning('登录状态已过期，请重新登录');
-      //   }
-      // }
+      if (error.response.status === 403) {
+        // 处理 403 错误，清除本地存储的 token
+        if (localStorage.getItem("token") !== null) {
+          localStorage.removeItem('token');
+          axios.defaults.headers.common["Authorization"] = "";
+          ElMessage.warning('登录状态已过期，请重新登录');
+        }
+      }
       return Promise.reject(error);
     }
 );
