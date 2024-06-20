@@ -10,16 +10,20 @@ let keyword = ref("");
 const emit = defineEmits(["search"]);
 
 const search = () => {
-  // alert(keyword.value)
+   // alert(keyword.value)
+   // console.log(keyword.value);
   emit('search', keyword.value);
-  if (!window.location.href.includes("search")) {
+  // if (!window.location.href.includes("search")) {
     router.push({path: "/search", query: {keyword: keyword.value}});
-  }
+    // console.log(router.query);
+  // }
 }
 
 function fastSearch(item) {
+   // alert("ok")
   keyword.value = item;
-  // alert(keyword.value)
+   // console.log(keyword.value);
+
   search();
 }
 </script>

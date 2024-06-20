@@ -38,12 +38,15 @@ async function search(params) {
   if (params === "") {
     params = "NULL";
   }
+
+  console.log(params);
   await axios.get('/product/search/' + params)
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.code === 200 || res.data.flag === true) {
           data.value = res.data.data;
           show.value = true;
+          // console.log(data.value);
         } else {
           ElMessage.error("搜索失败，请重试！");
         }
@@ -70,6 +73,8 @@ function showDetails(item) {
 }
 
 search(router.currentRoute.value.query.keyword);
+ // console.log(router.currentRoute.value.query.keyword);
+
 
 </script>
 

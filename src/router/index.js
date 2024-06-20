@@ -39,6 +39,11 @@ const router = createRouter({
             component: () => import('../views/manage/ManageView.vue'),
         },
         {
+            path: '/manageTenant',
+            name: 'manageTenant',
+            component: () => import('../views/manage/ManageTenant.vue'),
+        },
+        {
             path: '/product',
             name: 'Product',
             component: () => import('../components/manage/ProductComponents.vue'),

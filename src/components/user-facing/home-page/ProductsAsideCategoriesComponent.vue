@@ -56,7 +56,7 @@ categories = [];
 await axios.get("/category/homePageCategory").then(function (response) {
   categories = response.data.data
   // alert(categories)
-  // console.log(categories)
+  //  console.log(categories)
 }, function () {
   ElMessage.error("连接失败！！！")
 }).catch(function () {
