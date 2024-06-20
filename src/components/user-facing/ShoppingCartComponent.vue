@@ -1,6 +1,6 @@
 <script>
 import axios from "axios";
-import {useRouter} from "vue-router";
+// import {useRouter} from "vue-router";
 import {ElMessageBox, ElMessage} from "element-plus";
 import {mapGetters} from "vuex";
 
@@ -48,9 +48,12 @@ export default {
         return this.urlPrefix + '/productSingleSmall/' + image.id + '.jpg';
     },
     async changeCount(cartId, count) {
-      await axios.post('/cart/alterGoodsNumber', {
-        id: cartId,
-        count: count
+      await axios.post('/cart/alterGoodsNumber', null, {
+        params: {
+          id: cartId,
+          count: count
+        }
+
       })
           .then(res => {
             if (res.status === 200 && res.data.flag) {
@@ -217,7 +220,7 @@ export default {
               type: 'error',
               duration: 2 * 1000
             });
-            useRouter().back();
+            // useRouter().back();
           }
         })
         .catch(() => {
@@ -226,7 +229,7 @@ export default {
             type: 'error',
             duration: 2 * 1000
           });
-          useRouter().back();
+          // useRouter().back();
         })
     this.show = true;
   }

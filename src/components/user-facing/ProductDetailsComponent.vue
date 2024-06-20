@@ -162,6 +162,7 @@ export default {
     }
   },
   methods: {
+
     async getDetails(id) {
       pid = id
       await axios.get("/user/getUser").then((data) => {
@@ -177,8 +178,13 @@ export default {
       })
 
       if (uid !== -1) {
-        await axios.get("/cart/checkCartStatus?uid=" + uid + "&pid=" + id)
-            .then((data) => {
+        await axios.get("/cart/checkCartStatus", {
+          params: {
+            "uid": uid,
+            "pid": pid
+          }
+        }).then((data) => {
+          console.log(data)
               if (data.data.flag)//如果查询成功
               {
                 this.buttonType = data.data.data ? "info" : "danger";//是否在购物车中
@@ -280,6 +286,7 @@ export default {
               type: 'success',
               duration: 2 * 1000
             });
+            this.getDetails(this.route.query.id)
           } else {
             ElMessage({
               message: '创建订单失败！',
@@ -317,6 +324,7 @@ export default {
               duration: 2 * 1000
             });
             this.buttonType = "info";
+
             // this.$root.$emit('updateCartCount');
           } else {
             ElMessage({

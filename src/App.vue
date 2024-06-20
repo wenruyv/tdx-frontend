@@ -10,17 +10,6 @@ axios.defaults.baseURL = "http://localhost:8780";
 axios.defaults.withCredentials = true;
 if (localStorage.getItem("token") !== null) {
   axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
-  // axios.get("/user/getUser")
-  //     .then((res) => {
-  //       if (res.status === 403) {
-  //         localStorage.removeItem("token");
-  //         axios.defaults.headers.common["Authorization"] = "";
-  //       }
-  //     })
-  //     .catch(() => {
-  //       localStorage.removeItem("token");
-  //       axios.defaults.headers.common["Authorization"] = "";
-  //     });
 }
 //服务器部署
 // axios.defaults.baseURL = '/store';
