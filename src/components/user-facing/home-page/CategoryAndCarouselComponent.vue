@@ -1,21 +1,21 @@
 <template>
   <div id="guidePage">
     <img id="catear" :style="{ visibility:'hidden'}" alt="catear" class="catear"
-         :src="`${store.getters.urlPrefix}/HomePage/catear.png`"/>
+         :src="`${urlPrefix}/HomePage/catear.png`"/>
     <div id="categoryWithCarousel" class="categoryWithCarousel">
       <div class="headbar show1">
         <div class="head">
-          <div class="leftMenu"><img align="center" alt="list" :src="`${store.getters.urlPrefix}/HomePage/list.png`"
+          <div class="leftMenu"><img align="center" alt="list" :src="`${urlPrefix}/HomePage/list.png`"
                                      style="height: 24px"></div>
           <div class="leftMenu">商品分类</div>
         </div>
         <div class="rightMenu">
           <div @mouseenter="showImage" @mouseleave="hideImage" style="float: left;">
-            <a href=""><img alt="chaoshi" :src="`${store.getters.urlPrefix}/HomePage/chaoshi.png`"/></a>
+            <a href=""><img alt="chaoshi" :src="`${urlPrefix}/HomePage/chaoshi.png`"/></a>
 <!--            <a href="">淘商城</a>-->
           </div>
           <div style="margin-left: 20px; float: left" @mouseenter="showImage" @mouseleave="hideImage">
-            <a href=""><img alt="guoji" :src="`${store.getters.urlPrefix}/HomePage/guoji.png`"/></a>
+            <a href=""><img alt="guoji" :src="`${urlPrefix}/HomePage/guoji.png`"/></a>
 <!--            <a href="" >淘国际</a>-->
           </div>
           <div v-for="(category,index) in categories" :key="category.cid" class="categoryTab">
@@ -36,6 +36,7 @@ import ProductsAsideCategoriesComponent from "@/components/user-facing/home-page
 import {useStore} from 'vuex';
 
 const store = useStore();
+const urlPrefix = store.getters['urlStore/urlPrefix'];
 
 let categories = ProductsAsideCategoriesComponent.data().categories
 

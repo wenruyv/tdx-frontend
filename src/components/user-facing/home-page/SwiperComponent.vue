@@ -30,7 +30,8 @@ import {Swiper, SwiperSlide} from 'swiper/vue'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import {Pagination} from "swiper";
-import store from "@/store/objectStore";
+// import store from "@/store/urlStore";
+import { mapGetters } from 'vuex';
 
 export default {
   name: "SwiperComponent",
@@ -41,11 +42,7 @@ export default {
   data() {
     return {
       modules: [Pagination],
-      picSrc: [
-        store.getters.urlPrefix + "/lunbo/1.jpg",
-        store.getters.urlPrefix + "/lunbo/2.jpg",
-        store.getters.urlPrefix + "/lunbo/3.jpg",
-        store.getters.urlPrefix + "/lunbo/4.jpg"],
+      picSrc: []
     }
   },
   methods: {
@@ -57,6 +54,18 @@ export default {
       let swiper = document.getElementById("SwiperComponent")
       swiper.style.display = "block"
     }
+  },
+  computed: {
+    ...mapGetters('urlStore', ['urlPrefix'])
+  },
+  mounted() {
+    // 在mounted生命周期钩子中设置picSrc
+    this.picSrc = [
+      this.urlPrefix + "/lunbo/1.jpg",
+      this.urlPrefix + "/lunbo/2.jpg",
+      this.urlPrefix + "/lunbo/3.jpg",
+      this.urlPrefix + "/lunbo/4.jpg"
+    ];
   }
 }
 </script>

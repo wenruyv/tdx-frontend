@@ -39,6 +39,7 @@ import {useRouter} from "vue-router";
 import {useStore} from "vuex";
 
 const store = useStore();
+const urlPrefix = store.getters['urlStore/urlPrefix'];
 //本地部署true，服务器部署false
 axios.defaults.withCredentials = true;
 
@@ -62,17 +63,18 @@ function submitForm() {
     return false;
   }
 
-  //TODO 修改地址
-  axios.post('/user/login', {
-    "username": username.value,
-    "password": password.value,
+  store.dispatch('userStore/login', {
+    username: username.value,
+    password: password.value
   }).then((res) => {
+    // console.log(res)
     if (res.data.flag) {
       ElMessage({
         message: '登录成功!',
         type: 'success',
         duration: 2 * 1000
       });
+      axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
       router.push('/');
     } else {
       ElMessage({
@@ -97,7 +99,7 @@ function submitForm() {
 }
 
 onMounted(() => {
-  document.getElementById('login').style.backgroundImage = `url(${store.getters.urlPrefix + "/login/6702.png"})`;
+  document.getElementById('login').style.backgroundImage = `url(${urlPrefix + "/login/login.png"})`;
 });
 
 </script>

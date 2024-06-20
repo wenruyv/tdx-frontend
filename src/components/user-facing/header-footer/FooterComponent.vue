@@ -2,6 +2,7 @@
 import {useStore} from "vuex";
 
 const store = useStore();
+const urlPrefix = store.getters['urlStore/urlPrefix'];
 </script>
 
 <template>
@@ -45,13 +46,13 @@ const store = useStore();
       </div>
       <div class="descColumn">
         <span class="descColumnTitle">手机淘东夕</span>
-        <a href="#"><img :src="`${store.getters.urlPrefix}/footer/ma.png`" alt="ma"></a>
+        <a href="#"><img :src="`${urlPrefix}/footer/ma.png`" alt="ma"></a>
       </div>
 
     </div>
 
     <div style="clear:both"></div>
-    <img id="cateye" class="cateye" :src="`${store.getters.urlPrefix}/footer/cateye.png`" alt="cateye">
+    <img id="cateye" class="cateye" :src="`${urlPrefix}/footer/cateye.png`" alt="cateye">
     <div id="copyright" class="copyright">
       <div class="white_link">
         <a href="#">关于淘东夕</a> &nbsp;
@@ -89,8 +90,8 @@ const store = useStore();
         <span>互联网药品信息服务资质证书编号：浙-（经营性）-2012-0005</span>
         <div class="copyRightYear">© 2003-2016 TMALL.COM 版权所有</div>
         <div style="margin-top: 1%; margin-bottom: 5px">
-          <img :src="`${store.getters.urlPrefix}/footer/copyRight1.jpg`" alt="copyRight1">
-          <img :src="`${store.getters.urlPrefix}/footer/copyRight2.jpg`" alt="copyRight2">
+          <img :src="`${urlPrefix}/footer/copyRight1.jpg`" alt="copyRight1">
+          <img :src="`${urlPrefix}/footer/copyRight2.jpg`" alt="copyRight2">
         </div>
       </div>
     </div>

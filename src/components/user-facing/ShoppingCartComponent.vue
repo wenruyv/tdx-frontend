@@ -2,6 +2,7 @@
 import axios from "axios";
 import {useRouter} from "vue-router";
 import {ElMessageBox, ElMessage} from "element-plus";
+import {mapGetters} from "vuex";
 
 export default {
   props: {
@@ -9,6 +10,9 @@ export default {
       type: Number,
       required: true
     }
+  },
+  computed: {
+    ...mapGetters('urlStore', ['urlPrefix'])
   },
   data() {
     return {
@@ -41,7 +45,7 @@ export default {
       if (image.singleSmall !== null)
         return image.singleSmall;
       else
-        return 'https://online-store-wenruyv.oss-cn-beijing.aliyuncs.com/productSingleSmall/' + image.id + '.jpg';
+        return this.urlPrefix + '/productSingleSmall/' + image.id + '.jpg';
     },
     async changeCount(cartId, count) {
       await axios.post('/cart/alterGoodsNumber', {

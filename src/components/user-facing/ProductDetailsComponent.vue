@@ -129,7 +129,8 @@
 import axios from "axios";
 import {useRoute, useRouter} from "vue-router";
 import {ElMessage} from "element-plus";
-import store from "@/store/objectStore";
+// import store from "@/store/urlStore";
+import {mapGetters} from "vuex";
 
 export default {
   name: "ProductDetails",
@@ -210,7 +211,7 @@ export default {
                 if (this.showImages[0].urlPath !== null)
                   this.leftImage = this.showImages[0].urlPath;
                 else
-                  this.leftImage = store.getters.urlPrefix + "/productSingle/"
+                  this.leftImage = this.urlPrefix + "/productSingle/"
                       + this.showImages[0].id + ".jpg";
               } else
                 this.leftImage = "";
@@ -240,17 +241,17 @@ export default {
       if (category.urlPath !== null) {
         return category.urlPath;
       }
-      return store.getters.urlPrefix + "/category/" + String(category.id) + ".jpg";
+      return this.urlPrefix + "/category/" + String(category.id) + ".jpg";
     },
     getImagePath(image) {
       if (image.singleSmall !== null)
         return image.singleSmall;
-      return store.getters.urlPrefix + "/productSingleSmall/" + String(image.id) + ".jpg";
+      return this.urlPrefix + "/productSingleSmall/" + String(image.id) + ".jpg";
     },
     getDetailImagePath(image) {
       if (image.urlPath !== null)
         return image.urlPath;
-      return store.getters.urlPrefix + "/productDetail/" + String(image.id) + ".jpg";
+      return this.urlPrefix + "/productDetail/" + String(image.id) + ".jpg";
     },
     getComment(count) {
       return "累计评价 " + count;
@@ -259,7 +260,7 @@ export default {
       if (image.urlPath !== null)
         this.leftImage = image.urlPath;
       else
-        this.leftImage = store.getters.urlPrefix + "/productSingle/" + image.id + ".jpg";
+        this.leftImage = this.urlPrefix + "/productSingle/" + image.id + ".jpg";
     },
     buyProduct() {
       if (uid === -1) {
@@ -343,8 +344,9 @@ export default {
   },
   computed: {
     backgroundImageUrl() {
-      return this.$store.getters.urlPrefix + "/site/priceBackground.png";
-    }
+      return this.urlPrefix + "/site/priceBackground.png";
+    },
+    ...mapGetters('urlStore', ["urlPrefix"]),
   }
 };
 

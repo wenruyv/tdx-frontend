@@ -6,7 +6,7 @@ import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css';
 import ElementPlus from 'element-plus'
 import 'font-awesome/css/font-awesome.min.css';
-import store from './store/objectStore'
+import store from './store/index'
 
 
 const app = createApp(App)

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="logo">
-      <a href="/"><img :src="`${store.getters.urlPrefix}/header/simpleLogo.png`" alt="logo" class="logo"/></a>
+      <a href="/"><img :src="`${urlPrefix}/header/simpleLogo.png`" alt="logo" class="logo"/></a>
     </div>
     <el-tabs v-model="activeTab">
       <el-tab-pane label="分类管理" name="tab1">
@@ -27,6 +27,7 @@ import Order from "@/components/manage/OrderComponents.vue";
 import {useStore} from "vuex";
 
 const store = useStore();
+const urlPrefix = store.getters['urlStore/urlPrefix'];
 
 let activeTab = ref("tab1");
 </script>

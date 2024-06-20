@@ -83,7 +83,8 @@
 import axios from 'axios'
 import router from "@/router";
 import {ElMessageBox} from "element-plus";
-import store from '@/store/objectStore';
+// import store from '@/store/urlStore';
+import {mapGetters} from "vuex";
 
 
 export default {
@@ -92,6 +93,9 @@ export default {
       type: Number,
       required: true
     }
+  },
+  computed: {
+    ...mapGetters('urlStore', ['urlPrefix'])
   },
   data() {
     return {
@@ -115,7 +119,7 @@ export default {
       if (image.singleSmall !== null)
         return image.singleSmall;
       else
-        return store.getters.urlPrefix + '/productSingleSmall/' + image.id + '.jpg';
+        return this.urlPrefix + '/productSingleSmall/' + image.id + '.jpg';
     },
     handleClick(event) {
       // 按照选中的标签筛选订单
