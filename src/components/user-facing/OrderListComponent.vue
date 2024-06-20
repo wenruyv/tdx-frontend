@@ -81,7 +81,6 @@
 
 <script>
 import axios from 'axios'
-import qs from "qs";
 import router from "@/router";
 import {ElMessageBox} from "element-plus";
 import store from '@/store/objectStore';
@@ -127,9 +126,11 @@ export default {
       }
     },
     async fetchOrders() {
-      const response = await axios.post('/order/getOrdersByUserId', qs.stringify({
-        "uid": this.userId,
-      }))
+      const response = await axios.get('/order/getOrdersByUserId', {
+        params: {
+          "uid": this.userId
+        }
+      })
       this.allOrders = response.data.data
       this.currentOrders = this.allOrders
     },
@@ -141,10 +142,11 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        axios.post('/order/updateStatus', qs.stringify({
+        // console.log(order)
+        axios.post('/order/updateStatus', {
           "id": order.id,
-          "status": order.status
-        })).then(response => {
+          "status": order.status,
+        }).then(response => {
           if (response.data.flag) {
             this.$message({
               message: '付款成功',
@@ -167,10 +169,10 @@ export default {
     },
     remind(order) {
       // 实现催发货逻辑
-      axios.post('/order/updateStatus', qs.stringify({
+      axios.post('/order/updateStatus', {
         "id": order.id,
         "status": order.status
-      })).then(response => {
+      }).then(response => {
         if (response.data.flag) {
           this.$message({
             message: '发货成功',
@@ -193,10 +195,10 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        axios.post('/order/updateStatus', qs.stringify({
+        axios.post('/order/updateStatus', {
           "id": order.id,
           "status": order.status
-        })).then(response => {
+        }).then(response => {
           if (response.data.flag) {
             this.$message({
               message: '收货成功',
@@ -228,11 +230,11 @@ export default {
         // 遍历订单中的每个商品
         order.orderItems.forEach(item => {
           // 为每个商品创建一个评价请求，并将该请求添加到 promises 数组中
-          let commentPromise = axios.post('/comment/addComment', qs.stringify({
+          let commentPromise = axios.post('/comment/add', {
             "pid": item.pid,
-            "uid": this.userId,
-            "content": value
-          }));
+            "content": value,
+            "uid": this.userId
+          });
           commentPromises.push(commentPromise);
         });
 
@@ -244,10 +246,10 @@ export default {
 
               if (allSuccess) {
                 // 如果所有的评价请求都成功，更新订单状态
-                axios.post('/order/updateStatus', qs.stringify({
+                axios.post('/order/updateStatus', {
                   "id": order.id,
                   "status": order.status
-                }));
+                });
                 this.$message({
                   message: '评价成功',
                   type: 'success'
