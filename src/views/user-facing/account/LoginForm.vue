@@ -63,16 +63,18 @@ function submitForm() {
     return false;
   }
 
-  axios.post('/user/login', {
-    "username": username.value,
-    "password": password.value,
+  store.dispatch('userStore/login', {
+    username: username.value,
+    password: password.value
   }).then((res) => {
+    // console.log(res)
     if (res.data.flag) {
       ElMessage({
         message: '登录成功!',
         type: 'success',
         duration: 2 * 1000
       });
+      axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
       router.push('/');
     } else {
       ElMessage({
@@ -97,7 +99,7 @@ function submitForm() {
 }
 
 onMounted(() => {
-  document.getElementById('login').style.backgroundImage = `url(${urlPrefix + "/login/6702.png"})`;
+  document.getElementById('login').style.backgroundImage = `url(${urlPrefix + "/login/login.png"})`;
 });
 
 </script>

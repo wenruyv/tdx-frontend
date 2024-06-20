@@ -3,8 +3,9 @@ import axios from "axios";
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 import {ElMessage} from "element-plus";
-// import qs from "qs";
+import {useStore} from "vuex";
 
+const store = useStore();
 const router = useRouter();
 const userName = ref("");
 const userId = ref("");
@@ -20,7 +21,8 @@ function register() {
 }
 
 function logout() {
-  axios.get("/user/logout")
+  // axios.get("/user/logout")
+  store.dispatch("userStore/logout")
       .then((res) => {
         if (res.data.flag) {
           isLogin.value = false;
@@ -37,11 +39,19 @@ function logout() {
 }
 
 function checkLogin() {
-  if (localStorage.getItem("token") === null || localStorage.getItem("token") === ""
-      || localStorage.getItem("token") === undefined || localStorage.getItem("token") === "undefined") {
-    isLogin.value = false;
-    return;
-  }
+  // if (localStorage.getItem("token") === null || localStorage.getItem("token") === ""
+  //     || localStorage.getItem("token") === undefined || localStorage.getItem("token") === "undefined") {
+  //   isLogin.value = false;
+  //   return;
+  // }
+
+  // if (store.state["userStore/token"] === null || store.state["userStore/token"] === ""
+  //     || store.state["userStore/token"] === undefined || store.state["userStore/token"] === "undefined") {
+  //   isLogin.value = false;
+  //   return;
+  // }
+
+  // alert(axios.defaults.headers.common["Authorization"])
 
   axios.get("user/getUser")
       .then((res) => {
@@ -52,9 +62,18 @@ function checkLogin() {
         } else {
           isLogin.value = false;
         }
+        if (res.status === 403) {
+          isLogin.value = false;
+          store.commit("userStore/clearToken")
+        }
       })
-      .catch(() => {
-        ElMessage.error("检查登录状态失败");
+      .catch((e) => {
+        if (e.response.status === 403) {
+          isLogin.value = false;
+          store.commit("userStore/clearToken")
+        } else {
+          ElMessage.error("检查登录状态失败");
+        }
       });
 }
 
