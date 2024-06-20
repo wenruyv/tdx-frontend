@@ -6,6 +6,7 @@ import {ElMessage} from "element-plus";
 // import qs from "qs";
 
 const router = useRouter();
+const userCartCount = ref(0);
 const userName = ref("");
 const userId = ref("");
 const isLogin = ref(false);
@@ -36,6 +37,18 @@ function logout() {
       });
 }
 
+function getUserCartCount() {
+  axios.get("/cart/getCount?id=" + userId.value)
+      .then((res) => {
+        if (res.data.flag) {
+          userCartCount.value = res.data.data;
+        }
+      })
+      .catch(() => {
+        ElMessage.error("获取购物车数量失败");
+      });
+}
+
 function checkLogin() {
   axios.get("user/getUser")
       .then((res) => {
@@ -43,6 +56,8 @@ function checkLogin() {
           isLogin.value = true;
           userName.value = res.data.data.username;
           userId.value = res.data.data.id;
+          // getUserGoods();
+          getUserCartCount();
         } else {
           isLogin.value = false;
         }
@@ -50,6 +65,15 @@ function checkLogin() {
       .catch(() => {
         ElMessage.error("检查登录状态失败");
       });
+}
+
+function toCart() {
+  router.push({
+    path: "/user/cart",
+    query: {
+      id: userId.value
+    }
+  });
 }
 
 onMounted(() => {
@@ -86,6 +110,10 @@ function toOrder() {
 
     <div v-if="isLogin" class="pull-right">
       <span style="cursor: pointer" @click="toOrder">我的订单</span>
+      <span style="cursor: pointer" @click="toCart">
+        <i aria-hidden="true" class="fa fa-shopping-cart"></i>
+        购物车&nbsp;<strong>{{ userCartCount }}</strong>&nbsp;件
+      </span>
     </div>
   </nav>
 </template>
