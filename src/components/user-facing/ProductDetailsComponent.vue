@@ -74,6 +74,10 @@
 
           <div align="center">
             <el-button plain type="danger" @click="buyProduct">立即购买</el-button>
+            <el-button id="inputToShoppingCart" :type="this.buttonType" @click="addToCart">
+              <i aria-hidden="true" class="fa fa-shopping-cart"></i>
+              &nbsp;加入购物车
+            </el-button>
           </div>
 
         </td>
@@ -287,7 +291,52 @@ export default {
       }
 
     },
+    addToCart() {
+      if (uid === -1) {
+        ElMessage({
+          message: '请先登录',
+          type: 'warning',
+          duration: 2 * 1000
+        });
+      } else if (this.buttonType === "info") {
+        ElMessage({
+          message: '已经在购物车中了～',
+          type: 'info',
+          duration: 2 * 1000
+        });
+      } else if (this.buttonType === "danger") {
+        axios.post("/cart/addGoods", {
+          "uid": uid,
+          "pid": pid,
+          "count": this.count,
+        }).then((data) => {
+          if (data.data.flag) {
+            ElMessage({
+              message: '加入购物车成功',
+              type: 'success',
+              duration: 2 * 1000
+            });
+            this.buttonType = "info";
+            // this.$root.$emit('updateCartCount');
+          } else {
+            ElMessage({
+              message: '加入购物车失败',
+              type: 'error',
+              duration: 2 * 1000
+            });
+          }
+        }).catch(() => {
+          ElMessage({
+            message: '加入购物车过程发生异常！',
+            type: 'error',
+            duration: 2 * 1000
+          });
+        })
+      }
+    },
+
   },
+
   async mounted() {
     this.show = false;
     await this.getDetails(this.route.query.id);
